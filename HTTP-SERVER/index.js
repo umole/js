@@ -5,9 +5,6 @@ const PORT = 3000;
 const server = http.createServer();
 server.on('request', (req, res) => {
     if (req.url === '/friends') {
-        // res.writeHead(200, {
-        //     'content-Type': 'application/json' 
-        // });
         res.statusCode = 200;
         res.setHeader('content-Type', 'application/json')
         res.end(JSON.stringify({
