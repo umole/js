@@ -9,13 +9,17 @@ const launch = {
     mission: "Kepler Exoplanet X",
     rocket: 'Explore 1', 
     launchDate: new Date("July 19, 2022"),
-    destination: "Kepler-442 b",
+    target: "Kepler-442 b",
     customer: ["Andy", 'Umole'],
     upcomming: true,
     success: true,
 };
 
 launches.set(launch.flightNumber, launch);
+
+function existLaunchWithId(launchId) {
+    return launches.has(launchId);
+}
 
 function getAllLaunches() {
     return Array.from(launches.values());
@@ -34,7 +38,17 @@ function addNewLaunch(launch) {
     );
 }
 
+function abortLaunchWithId(launchId) {
+   const aborted =  launches.get(launchId);
+   aborted.upcomming = false;
+   aborted.success = false;
+   return aborted;
+
+}
+
 module.exports = {
     getAllLaunches,
     addNewLaunch,
+    existLaunchWithId,
+    abortLaunchWithId
 };
