@@ -2,23 +2,22 @@ const express = require('express');
 
 const app = express();
 
-const PORT = 3000;
+function delay(duration) {
+    const startTime = Date.now();
+
+    while (Date.now() - startTime < duration) {
+        //event is blocked...
+    }
+}
 
 app.get('/', (req, res) => {
-    res.send({
-        id: 0,
-        name: "Sir Andrew Umole"
-    });
+    res.send('Performance Example');
 });
 
-app.get('/messages', (req, res) => {
-    res.send('<ul><li>Nevada</li><li>California</li><li>New York</li></ul>');
-});
-
-app.post('/messages', (req, res) => {
-    console.log('updating messages...');
+app.get('/timer', (req, res) => {
+    // delay the response by a few secs
+    delay(8000);
+    res.send('Hey dude! Wake up.');
 })
-app.listen((PORT), () => {
-    console.log(`Server is listening on port: ${PORT}...`);
-});
 
+app.listen(3000);
