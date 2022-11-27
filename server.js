@@ -1,29 +1,25 @@
-const express = require('express');
-const { fork } = require('child_process');
+const http = require('http');
 
+const app = require('./app');
 
-const app = express();
+const PORT = process.env.PORT || 8000;
 
-function delay(duration) {
-    const startTime = Date.now();
+const MONGO_URL = ""
 
-    while (Date.now() - startTime < duration) {
-        //event is blocked...
-    }
-}
+const { loadPlanetsData } = require('./models/planets.model');
 
-app.get('/', (req, res) => {
-    res.send(`Performance Example ${process.pid}`);
+const server = http.createServer(app);
+
+const startFunction = async () => {
+    await loadPlanetsData();
+
+    server.listen(PORT, () => {
+    console.log(`Listening on PORT: ${PORT}...`);
 });
+};
 
-app.get('/timer', (req, res) => {
-    // delay the response by a few secs
-    delay(8000);
-    res.send(`Wddup Nigger! Wake up. ${process.pid}`);
-})
+startFunction();
 
-console.log('server.js started...')
-console.log('worker process started.')
-app.listen(3000);
+
 
 
