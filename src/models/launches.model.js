@@ -1,5 +1,7 @@
 //const { map } = require("../app");
 
+//const launches = require('./launches.mongoose');
+
 const launches = new Map();
 
 let latestFlightNumber = 100;
@@ -10,7 +12,7 @@ const launch = {
     rocket: 'Explore 1', 
     launchDate: new Date("July 19, 2022"),
     target: "Kepler-442 b",
-    customer: ["Andy", 'Umole'],
+    customers: ["Andy", 'Umole'],
     upcomming: true,
     success: true,
 };
