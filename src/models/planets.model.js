@@ -34,7 +34,6 @@ function loadPlanetsData() {
         resolve();
     });
     });
-    
 }
 
 async function getAllPlanets() {
@@ -51,7 +50,7 @@ async function savePlanet(planet) {
             upsert: true
         });
     } catch (err) {
-        console.error(`Could not sav planet. ${err}`);
+        console.error(`Could not save planet. ${err}`);
         }
     }
     
