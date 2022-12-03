@@ -1,4 +1,4 @@
-//const { map } = require("../app");
+const { map } = require("../app");
 
 const launches = require('./launches.mongoose');
 
@@ -28,12 +28,12 @@ function getAllLaunches() {
 }
 
 async function saveLaunch(launch) {
-    await launchesDatabase.updateOne({
+    await launchesDatabase.findOneAndUpdate({
         flightNumber: launch.flightNumber,
     }, launch, {
         upsert: true,
     });
-};
+}
 
 
 
