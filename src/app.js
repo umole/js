@@ -3,22 +3,23 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 
-const api = require('./routes/api');
+const planetsRouter = require('./routes/planets/planets.router');
+const { launchesRouter } = require('./routes/launches/launches.router');
 
 const app = express();
 
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: '*',
 }));
 app.use(morgan('combined'));
+
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-
-app.get("/*", (req, res) => {
+app.use('/launches', launchesRouter);
+app.use('/planets', planetsRouter);
+app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });
-
-app.use('/v1', api);
 
 module.exports = app;

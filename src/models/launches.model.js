@@ -1,66 +1,51 @@
-const { map } = require("../app");
+const launches = new Map();
 
-const launches = require('./launches.mongoose');
-
-const launchesDatabase = new Map();
-
-let latestFlightNumber = 100;
+let latestFlightNumber = '100';
 
 const launch = {
     flightNumber: 100,
-    mission: "Kepler Exoplanet X",
-    rocket: 'Explore 1', 
-    launchDate: new Date("July 19, 2022"),
-    target: "Kepler-442 b",
-    customers: ["Andy", 'Umole'],
-    upcomming: true,
-    success: true,
+    mission: 'Kepler Exploration 1',
+    rocket: 'Exporer 1sI',
+    launchdate: new Date('December 27, 2030'),
+    target: 'Kepler-442 b',
+    customers: ['Andrew', 'Umole'],
+    upcoming: true,
+    success: true 
 };
 
-saveLaunch(launch);
+launches.set(launch.flightNumber, launch);
 
 function existLaunchWithId(launchId) {
-    return launches.has(launchId);
+    return launches.has(launchId)
 }
 
 function getAllLaunches() {
     return Array.from(launches.values());
 }
 
-async function saveLaunch(launch) {
-    await launchesDatabase.findOneAndUpdate({
-        flightNumber: launch.flightNumber,
-    }, launch, {
-        upsert: true,
-    });
-}
-
-
-
 function addNewLaunch(launch) {
     latestFlightNumber++;
     launches.set(
-        latestFlightNumber,
+        latestFlightNumber, 
         Object.assign(launch, {
             success: true,
-            upcomming: true,
-            customer: ["Zero to mastery", "NASA"],
+            upcoming: true,
+            customers: ['Andrew', 'Umole'],
             flightNumber: latestFlightNumber,
         })
     );
 }
 
 function abortLaunchWithId(launchId) {
-   const aborted =  launches.get(launchId);
-   aborted.upcomming = false;
-   aborted.success = false;
-   return aborted;
-
+    const aborted = launches.get(launchId);
+    aborted.upcoming = false;
+    aborted.success = false;
+    return aborted;
 }
 
 module.exports = {
+    existLaunchWithId,
     getAllLaunches,
     addNewLaunch,
-    existLaunchWithId,
     abortLaunchWithId
-};
+}
