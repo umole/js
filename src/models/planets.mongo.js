@@ -3,8 +3,9 @@ const mongoose = require('mongoose');
 const planetSchema = new mongoose.Schema({
     keplerName: {
         type: String,
-        required: true
+        reqired: true
     }
 });
 
-module.exports = mongoose.model('Planet', planetSchema);
+//This connects the planetSchema to the planets collection
+model.export = mongoose.model('Planet', planetSchema);
