@@ -36,9 +36,13 @@ function loadPlanetsData() {
     .on('data', async (data) => {
         if (isHabbitablePlanet(data)) {
             // // insert + update = upsert
-            // await planets.create({
-            //     keplerName: data.kepler_name
-            // });
+            await planets.updateOne({
+                keplerName: data.kepler_name
+            }, {
+                keplerName: data.kepler_name
+            }, {
+                upsert: true,
+            });
         }
     })
     .on('Error', (err) => {
