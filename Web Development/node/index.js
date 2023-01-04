@@ -1,3 +1,9 @@
-const { copyFileSync, constants } = require('node:fs');
+const supervillains = require('supervillains');
 
-copyFileSync("text1.txt", "text2.txt");
+const allsuperVillainName = supervillains.all;
+//=> ['Abattoir', 'Able Crown', …]
+console.log(allsuperVillainName);
+
+const mySuperVillainName = supervillains.random();
+//=> 'Mud Pack'
+console.log(mySuperVillainName);
